@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<body style="background:black;color:white;text-align:center;font-family:Arial">
+
+<script>
+if(!localStorage.getItem("token")) location.href="login.html";
+</script>
+
+<h2>Shorts</h2>
+<div id="shorts"></div>
+
+<script>
+fetch("https://crazed-infinite-backend.onrender.com/shorts")
+.then(r=>r.json())
+.then(d=>{
+shorts.innerHTML=d.map(s=>`
+<div>
+<iframe width="300" height="500" src="${s.url}"></iframe><br>
+❤️ ${s.likes}
+<button onclick="like('${s._id}')">Like</button>
+</div>`).join("");
+});
+
+function like(id){
+fetch("https://crazed-infinite-backend.onrender.com/short/like/"+id,{method:"PUT"})
+.then(()=>location.reload());
+}
+</script>
+
+</body>
+</html>

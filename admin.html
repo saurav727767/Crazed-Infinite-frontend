@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html><body style="background:#111;color:white;text-align:center">
+<script>
+if(!localStorage.getItem("token"))location.href="login.html";
+</script>
+
+<h2>Add Video</h2>
+<input id="url" placeholder="YouTube Embed URL">
+<button onclick="add()">Add</button>
+
+<script>
+function add(){
+fetch("https://crazed-infinite-backend.onrender.com/admin/video",{
+method:"POST",
+headers:{
+"Content-Type":"application/json",
+authorization:localStorage.getItem("token")
+},
+body:JSON.stringify({url:url.value})
+}).then(()=>alert("Added"));
+}
+</script>
+</body></html>

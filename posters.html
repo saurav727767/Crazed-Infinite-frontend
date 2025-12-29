@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html><body style="background:black;color:white;text-align:center">
+<script>
+if(!localStorage.getItem("token"))location.href="login.html";
+</script>
+<h2>Posters</h2>
+<div id="posters"></div>
+<script>
+fetch("https://crazed-infinite-backend.onrender.com/posters")
+.then(r=>r.json())
+.then(d=>posters.innerHTML=d.map(p=>`<img width="200" src="${p.image}">`).join(""));
+</script>
+</body></html>
