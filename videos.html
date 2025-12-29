@@ -73,6 +73,34 @@ videos.innerHTML=d.map(v=>`
 
 loadVideos();
 </script>
+  <script>
+  const API_KEY = "AIzaSyB0NBNAY04E-BU8CtxGqd01lIz-aq09wT8";
+  const CHANNEL_ID = "@crazedinfinite
+";
+
+  fetch(`https://www.googleapis.com/youtube/v3/search?key=${AIzaSyB0NBNAY04E-BU8CtxGqd01lIz-aq09wT8}&channelId=${@crazedinfinite
+}&part=snippet,id&order=date&maxResults=6`)
+    .then(res => res.json())
+    .then(data => {
+      document.getElementById("videos").innerHTML =
+        data.items
+          .filter(item => item.id.videoId)
+          .map(v => `
+            <div class="card">
+              <iframe 
+                src="https://www.youtube.com/embed/${v.id.videoId}" 
+                allowfullscreen>
+              </iframe>
+              <div class="info">
+                <h4>${v.snippet.title}</h4>
+              </div>
+            </div>
+          `)
+          .join("");
+    });
+</script>
+
 
 </body>
 </html>
+
